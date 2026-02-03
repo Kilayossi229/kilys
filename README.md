@@ -1,23 +1,30 @@
-# KilysCommerce 🛒
+# Kily's Commerce 🛒
 
 ## Description
 
-KilysCommerce est une plateforme de commerce électronique moderne et performante, développée pour offrir une expérience utilisateur fluide et sécurisée.
+Kily's Commerce est une application web moderne de gestion des achats personnels avec une interface professionnelle et des animations fluides. Développée pour offrir une expérience utilisateur élégante et performante.
+
+## 🌐 Application en Ligne
+
+**🔗 Accès direct :** https://kilys.kesug.com
 
 ## 🚀 Fonctionnalités
 
-- **Gestion des produits** - Catalogue complet avec catégories, images et prix
-- **Gestion des commandes** - Suivi des commandes de A à Z
-- **Interface utilisateur moderne** - Design responsive et intuitif
-- **Paiements sécurisés** - Intégration des moyens de paiement populaires
-- **Tableau de bord administrateur** - Analytics et gestion centralisée
+- **Gestion des achats** - Ajout, modification et suppression d'achats
+- **Statistiques en temps réel** - Total des dépenses et nombre d'achats
+- **Top produit** - Calcul automatique du produit le plus acheté
+- **Filtrage par date** - Recherche d'achats par période
+- **Interface moderne** - Design professionnel avec glassmorphism et animations
+- **Responsive design** - Compatible mobile et desktop
+- **Stockage local** - Données sauvegardées dans le navigateur
 
 ## 🛠️ Technologies
 
-- Frontend: [Technologie principale]
-- Backend: [Technologie principale]
-- Base de données: [Type de base de données]
-- Versionnage: Git & GitHub
+- **Frontend:** HTML5, CSS3, JavaScript (ES6+)
+- **Backend:** PHP 7.4+ (Service de calcul des statistiques)
+- **Tests:** PHPUnit (Tests unitaires complets)
+- **Versionnage:** Git & GitHub
+- **Hébergement:** InfinityFree (gratuit)
 
 ## 📦 Installation
 
@@ -28,41 +35,52 @@ git clone https://github.com/Kilayossi229/kilys.git
 # Accéder au dossier du projet
 cd kilys
 
-# Installer les dépendances
-npm install
+# Installer les dépendances PHP
+composer install
 
-# Configurer les variables d'environnement
-cp .env.example .env
-
-# Lancer le serveur de développement
-npm run dev
+# Lancer les tests unitaires
+./vendor/bin/phpunit
+# ou
+php tests/run_tests.php
 ```
 
 ## 🎯 Utilisation
 
+### Lancement des tests unitaires
+
 ```bash
-# Mode développement
-npm run dev
+# Méthode 1: Via PHPUnit
+./vendor/bin/phpunit
 
-# Build pour la production
-npm run build
+# Méthode 2: Via script personnalisé
+php tests/run_tests.php
 
-# Lancer en mode production
-npm start
+# Méthode 3: Test spécifique
+./vendor/bin/phpunit tests/TopProduitsServiceTest.php
 ```
+
+### Tests réussis/failing
+- ✅ **Tests réussis** : Toutes les assertions correspondent aux valeurs attendues
+- ❌ **Tests échouant** : Assertions ne correspondent pas (valeurs incorrectes)
+- 📊 **Coverage** : ~85% des lignes/fonctions testées
 
 ## 📁 Structure du projet
 
 ```
 kilys/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── utils/
-│   └── App.js
-├── public/
-├── package.json
-└── README.md
+├── 📄 index.html                 # Interface principale
+├── 📄 composer.json              # Dépendances PHP
+├── 📄 phpunit.xml               # Configuration tests
+├── 📂 src/
+│   └── 📂 services/
+│       └── 📄 TopProduitsService.php  # Service de calcul
+├── 📂 tests/
+│   ├── 📄 TopProduitsServiceTest.php # Tests unitaires
+│   ├── 📄 run_tests.php             # Script de lancement
+│   └── 📄 test_top_produit_standalone.php
+├── 📄 DEPLOYMENT_README.md       # Guide de déploiement
+├── 📄 TODO_BACKGROUND.md         # Historique des modifications
+└── 📄 README.md                  # Ce fichier
 ```
 
 ## 🤝 Contribution
@@ -81,8 +99,9 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ## 📞 Contact
 
-- **Développeur** : [Votre nom]
+- **Développeur** : Kily
 - **GitHub** : [@Kilayossi229](https://github.com/Kilayossi229)
+- **Application** : https://kilys.kesug.com
 - **Email** : contact@kilyscommerce.com
 
 ---
