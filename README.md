@@ -1,25 +1,22 @@
-# KilysCommerce 🛒
+# Kily's Commerce 🛒
 
 ## Description
 
-KilysCommerce est une plateforme de commerce électronique moderne et performante, développée pour offrir une expérience utilisateur fluide et sécurisée.
+Kily's Commerce est une application de gestion des achats moderne et performante, développée pour offrir une expérience utilisateur fluide et sécurisée.
 
-## 🚀 Fonctionnalités
+## 🚀 Application en ligne
 
-- **Gestion des produits** - Catalogue complet avec catégories, images et prix
-- **Gestion des commandes** - Suivi des commandes de A à Z
-- **Interface utilisateur moderne** - Design responsive et intuitif
-- **Paiements sécurisés** - Intégration des moyens de paiement populaires
-- **Tableau de bord administrateur** - Analytics et gestion centralisée
+🌐 **https://kilys.kesug.com**
 
 ## 🛠️ Technologies
 
-- Frontend: [Technologie principale]
-- Backend: [Technologie principale]
-- Base de données: [Type de base de données]
+- Frontend: HTML5, CSS3, JavaScript (Vanilla)
+- Backend: PHP natif
+- Tests: PHPUnit
+- Base de données: localStorage (front-end)
 - Versionnage: Git & GitHub
 
-## 📦 Installation
+## 📦 Installation et Tests
 
 ```bash
 # Cloner le dépôt
@@ -28,52 +25,64 @@ git clone https://github.com/Kilayossi229/kilys.git
 # Accéder au dossier du projet
 cd kilys
 
-# Installer les dépendances
-npm install
+# Installer les dépendances PHP
+composer install
 
-# Configurer les variables d'environnement
-cp .env.example .env
+# Lancer les tests unitaires
+./vendor/bin/phpunit
 
-# Lancer le serveur de développement
-npm run dev
+# OU exécuter le script de tests personnalisé
+php tests/run_tests.php
 ```
 
-## 🎯 Utilisation
+## 🎯 Fonctionnalités
 
-```bash
-# Mode développement
-npm run dev
-
-# Build pour la production
-npm run build
-
-# Lancer en mode production
-npm start
-```
+- **Gestion des achats** - Ajouter, visualiser et supprimer des achats
+- **Statistiques en temps réel** - Total des dépenses, nombre d'achats
+- **Top produit** - Produit le plus fréquemment acheté
+- **Filtres par date** - Filtrer l'historique des achats
+- **Interface moderne** - Design responsive avec animations fluides
+- **Persistance des données** - Stockage local via localStorage
 
 ## 📁 Structure du projet
 
 ```
 kilys/
+├── index.html                 # Interface principale
+├── README.md                  # Documentation principale
+├── composer.json              # Dépendances PHP
+├── phpunit.xml                # Configuration PHPUnit
 ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── utils/
-│   └── App.js
-├── public/
-├── package.json
-└── README.md
+│   └── services/
+│       └── TopProduitsService.php
+├── tests/
+│   ├── run_tests.php
+│   ├── TopProduitsServiceTest.php
+│   └── test_top_produit_standalone.php
+└── diagrammes UML et MCD.plantuml
 ```
 
-## 🤝 Contribution
+## 🤝 Exécuter les Tests
 
-Les contributions sont les bienvenues ! Pour contribuer :
+```bash
+# Tests PHPUnit complets
+./vendor/bin/phpunit
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+# Tests rapides
+php tests/run_tests.php
+
+# Test standalone
+php tests/test_top_produit_standalone.php
+```
+
+## 🚀 Déploiement
+
+L'application est déployée sur **InfinityFree** (hébergement gratuit):
+- URL: https://kilys.kesug.com
+- Serveur: InfinityFree
+- Protocol: HTTP/HTTPS
+
+Guide de déploiement : voir [DEPLOYMENT_README.md](DEPLOYMENT_README.md)
 
 ## 📄 Licence
 
