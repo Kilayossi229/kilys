@@ -90,7 +90,7 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ## 📞 Contact
 
-- **Développeur** : [Votre nom]
+- **Développeur** : [KILAYOSSI Constant]
 - **GitHub** : [@Kilayossi229](https://github.com/Kilayossi229)
 - **Email** : contact@kilyscommerce.com
 
