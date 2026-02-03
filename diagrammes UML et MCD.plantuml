@@ -1,0 +1,202 @@
+@startuml Diagramme des cas d'utilisation
+
+skinparam packageStyle rectangle
+skinparam usecaseBackgroundColor White
+skinparam usecaseBorderColor #007BFF
+skinparam usecaseArrowColor #007BFF
+skinparam actorBackgroundColor #E3F2FD
+skinparam actorBorderColor #007BFF
+
+' Acteurs
+actor "Client" as Client #E8F5E9
+actor "Administrateur" as Admin #FFEBEE
+
+' Package Gestion des Produits
+rectangle "Gestion des Produits" #F5F5F5 {
+  usecase "Parcourir les produits" as UC1
+  usecase "Rechercher un produit" as UC2
+  usecase "Consulter les détails\nd'un produit" as UC3
+  usecase "Gérer les produits\n(CRUD)" as UC4
+  usecase "Gérer les catégories" as UC5
+  usecase "Gérer les images\ndes produits" as UC6
+}
+
+' Package Gestion du Panier
+rectangle "Gestion du Panier" #F5F5F5 {
+  usecase "Ajouter au panier" as UC7
+  usecase "Modifier la\nquantité" as UC8
+  usecase "Supprimer du panier" as UC9
+  usecase "Vider le panier" as UC10
+  usecase "Consulter le panier" as UC11
+}
+
+' Package Gestion des Commandes
+rectangle "Gestion des Commandes" #F5F5F5 {
+  usecase "Passer une commande" as UC12
+  usecase "Suivre une commande" as UC13
+  usecase "Consulter l'historique\ndes commandes" as UC14
+  usecase "Annuler une commande" as UC15
+  usecase "Gérer les commandes" as UC16
+}
+
+' Package Paiement
+rectangle "Paiement" #F5F5F5 {
+  usecase "Choisir le mode\nde paiement" as UC17
+  usecase "Effectuer le paiement" as UC18
+  usecase "Recevoir la\nconfirmation" as UC19
+}
+
+' Package Administrateur
+rectangle "Administration" #FFF3E0 {
+  usecase "Accéder au tableau\nde bord" as UC20
+  usecase "Consulter les\nanalytics" as UC21
+  usecase "Gérer les utilisateurs" as UC22
+}
+
+' Relations Client
+Client --> UC1 : "Parcourt"
+Client --> UC2 : "Recherche"
+Client --> UC3 : "Consulte"
+Client --> UC7 : "Ajoute"
+Client --> UC8 : "Modifie"
+Client --> UC9 : "Supprime"
+Client --> UC10 : "Vide"
+Client --> UC11 : "Consulte"
+Client --> UC12 : "Passe"
+Client --> UC13 : "Suit"
+Client --> UC14 : "Consulte"
+Client --> UC15 : "Annule"
+Client --> UC17 : "Choisit"
+Client --> UC18 : "Effectue"
+Client --> UC19 : "Reçoit"
+
+' Relations Administrateur
+Admin --> UC4 : "Gère"
+Admin --> UC5 : "Gère"
+Admin --> UC6 : "Gère"
+Admin --> UC16 : "Gère"
+Admin --> UC20 : "Accède"
+Admin --> UC21 : "Consulte"
+Admin --> UC22 : "Gère"
+
+@enduml
+
+@startuml MCD - Modèle Conceptuel de Données
+
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor White
+skinparam classBorderColor #333333
+skinparam entityBackgroundColor #E3F2FD
+skinparam relationshipBackgroundColor #FFF3E0
+
+' Entités principales
+class Utilisateur {
+  id: INT <<PK>>
+  email: VARCHAR(255) <<UK>>
+  mot_de_passe: VARCHAR(255)
+  nom: VARCHAR(100)
+  prenom: VARCHAR(100)
+  telephone: VARCHAR(20)
+  role: ENUM('client', 'admin')
+  date_inscription: DATETIME
+  est_actif: BOOLEAN
+}
+
+class Produit {
+  id: INT <<PK>>
+  nom: VARCHAR(255)
+  description: TEXT
+  prix: DECIMAL(10,2)
+  stock: INT
+  sku: VARCHAR(50) <<UK>>
+  est_actif: BOOLEAN
+  date_creation: DATETIME
+  date_modification: DATETIME
+}
+
+class Categorie {
+  id: INT <<PK>>
+  nom: VARCHAR(100)
+  description: TEXT
+  slug: VARCHAR(100) <<UK>>
+  categorie_parent_id: INT <<FK>>
+}
+
+class Image {
+  id: INT <<PK>
+  url: VARCHAR(500)
+  est_principale: BOOLEAN
+  ordre: INT
+}
+
+class Panier {
+  id: INT <<PK>>
+  quantite: INT
+  date_ajout: DATETIME
+}
+
+class Commande {
+  id: INT <<PK>>
+  numero: VARCHAR(50) <<UK>>
+  statut: ENUM('en_attente', 'validee', 'expediee', 'livree', 'annulee')
+  total: DECIMAL(10,2)
+  adresse_livraison: TEXT
+  adresse_facturation: TEXT
+  date_commande: DATETIME
+  date_modification: DATETIME
+}
+
+class LigneCommande {
+  id: INT <<PK>>
+  quantite: INT
+  prix_unitaire: DECIMAL(10,2)
+  reduction: DECIMAL(10,2)
+}
+
+class Paiement {
+  id: INT <<PK>>
+  montant: DECIMAL(10,2)
+  methode: ENUM('carte_bancaire', 'virement', 'paypal')
+  statut: ENUM('en_attente', 'valide', 'echoue', 'rembourse')
+  date_paiement: DATETIME
+  transaction_id: VARCHAR(100)
+}
+
+class Adresse {
+  id: INT <<PK>>
+  libelle: VARCHAR(100)
+  rue: VARCHAR(255)
+  ville: VARCHAR(100)
+  code_postal: VARCHAR(20)
+  pays: VARCHAR(100)
+  est_par_defaut: BOOLEAN
+}
+
+class Commentaire {
+  id: INT <<PK>>
+  note: INT (1-5)
+  contenu: TEXT
+  date_creation: DATETIME
+  est_approuve: BOOLEAN
+}
+
+' Relations
+Utilisateur "1" -- "0..*" Panier : "possède"
+Utilisateur "1" -- "0..*" Commande : "passe"
+Utilisateur "1" -- "0..*" Adresse : "possède"
+Utilisateur "1" -- "0..*" Commentaire : "écrit"
+
+Produit "1" -- "0..*" Image : "possède"
+Produit "1" -- "0..*" Commentaire : "reçoit"
+Produit "1" -- "0..*" LigneCommande : "compose"
+
+Categorie "1" -- "0..*" Categorie : "est_sous_categorie_de"
+Categorie "1" -- "0..*" Produit : "contient"
+
+Commande "1" -- "1" Paiement : "possède"
+Commande "1" -- "1..*" LigneCommande : "contient"
+
+Panier "1" -- "0..*" LigneCommande : "contient"
+
+@enduml
+
