@@ -68,5 +68,7 @@ class TopProduitsService
 
         return round(($count / $total) * 100, 2);
     }
+
 }
+
 
